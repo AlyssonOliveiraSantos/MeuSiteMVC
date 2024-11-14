@@ -1,6 +1,13 @@
+using MeuSiteMVC.Data;
+using MeuSiteMVC.Repositorio;
+using Microsoft.EntityFrameworkCore;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
+
+builder.Services.AddDbContext<BancoContext>(options => options.UseOracle(builder.Configuration.GetConnectionString("DefaultConnection")));
+builder.Services.AddScoped<IContatoRepositorio, ContatoRepositorio>();
 builder.Services.AddControllersWithViews();
 
 var app = builder.Build();

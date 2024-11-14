@@ -1,8 +1,8 @@
-using MeuSiteEmMVC.Models;
+using MeuSiteMVC.Models;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 
-namespace MeuSiteEmMVC.Controllers
+namespace MeuSiteMVC.Controllers
 {
     public class HomeController : Controller
     {

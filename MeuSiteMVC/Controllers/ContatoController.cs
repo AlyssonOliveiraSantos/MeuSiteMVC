@@ -1,12 +1,20 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using MeuSiteMVC.Models;
+using MeuSiteMVC.Repositorio;
+using Microsoft.AspNetCore.Mvc;
 
-namespace MeuSiteEmMVC.Controllers
+namespace MeuSiteMVC.Controllers
 {
     public class ContatoController : Controller
     {
+        private readonly IContatoRepositorio _contatoRepositorio;
+        public ContatoController(IContatoRepositorio contatoRepositorio)
+        {
+            _contatoRepositorio = contatoRepositorio;
+        }
         public IActionResult Index()
         {
-            return View();
+            List<ContatoModel>_contatos = _contatoRepositorio.BuscarTodos();
+            return View(_contatos);
         }
 
         public IActionResult Criar()
@@ -23,5 +31,13 @@ namespace MeuSiteEmMVC.Controllers
         {
             return View();
         }
+
+        [HttpPost]
+        public IActionResult Criar(ContatoModel contato)
+        {
+            _contatoRepositorio.Adicionar(contato);
+            return RedirectToAction("Index");
+        }
+
     }
 }

@@ -1,4 +1,4 @@
-namespace MeuSiteEmMVC.Models
+namespace MeuSiteMVC.Models
 {
     public class ErrorViewModel
     {
