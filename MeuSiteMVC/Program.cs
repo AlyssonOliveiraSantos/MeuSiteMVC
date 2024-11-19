@@ -8,6 +8,7 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddDbContext<BancoContext>(options => options.UseOracle(builder.Configuration.GetConnectionString("DefaultConnection")));
 builder.Services.AddScoped<IContatoRepositorio, ContatoRepositorio>();
+builder.Services.AddScoped<IUsuarioRepositorio, UsuarioRepositorio>();
 builder.Services.AddControllersWithViews();
 
 var app = builder.Build();
