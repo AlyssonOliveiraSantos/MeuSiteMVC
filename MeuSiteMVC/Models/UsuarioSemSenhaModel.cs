@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace MeuSiteMVC.Models
 {
-    public class UsuarioModel
+    public class UsuarioSemSenhaModel
     {
 
         public int id { get; set; }
@@ -18,20 +18,9 @@ namespace MeuSiteMVC.Models
         [EmailAddress(ErrorMessage = "O e-mail informado não é valido")]
         public string Email { get; set; }
 
-        [Required(ErrorMessage = "Digite a senha do usuário")]
-        public string Senha { get; set; }
-
         [Required(ErrorMessage = "Digite o perfil do usuário")]
         public PerfilEnum? Perfil { get; set; }
-
-        public DateTime DataCadastro { get; set; }
         
-        public DateTime? DataAtualizacao { get; set; }
-
-        public bool SenhaValida(string senha)
-        {
-            return senha == Senha;
-        }
 
     }
 }

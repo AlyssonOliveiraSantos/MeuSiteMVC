@@ -12,6 +12,11 @@ namespace MeuSiteMVC.Repositorio
             _bancoContext = bancoContext;
         }
 
+        public UsuarioModel BuscarPorLogin(string login)
+        {
+            return _bancoContext.Usuarios.FirstOrDefault(x => x.Login.ToUpper() == login.ToUpper());
+        }
+
         public UsuarioModel ListarPorId(int id)
         {
             return _bancoContext.Usuarios.FirstOrDefault(x => x.id == id);
@@ -40,6 +45,7 @@ namespace MeuSiteMVC.Repositorio
             usuarioDb.Nome = usuario.Nome;
             usuarioDb.Email = usuario.Email;
             usuarioDb.Login = usuario.Login;
+            usuarioDb.Perfil = usuario.Perfil;
             usuarioDb.DataAtualizacao = DateTime.Now;
 
             _bancoContext.Usuarios.Update(usuarioDb);
@@ -51,11 +57,13 @@ namespace MeuSiteMVC.Repositorio
         public bool Apagar(int id)
         {
             UsuarioModel usuarioDb = ListarPorId(id);
-            if (usuarioDb == null) throw new Exception("Houve um erro na deleção desse usuario");
+            if (usuarioDb == null) throw new Exception("Houve um erro na deleção desse usuário");
 
             _bancoContext.Usuarios.Remove(usuarioDb);
             _bancoContext.SaveChanges();
             return true;
         }
+
+
     }
 }
