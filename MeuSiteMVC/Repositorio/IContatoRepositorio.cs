@@ -4,7 +4,6 @@ namespace MeuSiteMVC.Repositorio
 {
     public interface IContatoRepositorio
     {
-
         ContatoModel ListarPorId(int id);
 
         List<ContatoModel> BuscarTodos();

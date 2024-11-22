@@ -17,8 +17,6 @@ namespace MeuSiteMVC.Controllers
             _sessao = sessao;
         }
 
-
-
         public IActionResult index()
         {
             if(_sessao.BuscarSessaoDoUsuario() != null) return RedirectToAction("Index", "Home");
@@ -30,8 +28,6 @@ namespace MeuSiteMVC.Controllers
             _sessao.RemoverSessaoDoUsuario();
             return RedirectToAction("Index","Login");
         }
-
-
 
         [HttpPost]
         public IActionResult Entrar(LoginModel loginModel)

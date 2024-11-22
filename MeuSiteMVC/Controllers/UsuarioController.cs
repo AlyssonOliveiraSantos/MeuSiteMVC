@@ -1,9 +1,12 @@
-﻿using MeuSiteMVC.Models;
+﻿using MeuSiteMVC.Filters;
+using MeuSiteMVC.Models;
 using MeuSiteMVC.Repositorio;
 using Microsoft.AspNetCore.Mvc;
 
 namespace MeuSiteMVC.Controllers
 {
+
+    [PaginaRestritaSomenteAdmin]
     public class UsuarioController : Controller
     {
         private readonly IUsuarioRepositorio _usuarioRepositorio;

@@ -12,20 +12,16 @@ namespace MeuSiteMVC.Data
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            // Aplicar maiúsculas para todos os nomes de tabelas e colunas automaticamente
+            
             foreach (var entity in modelBuilder.Model.GetEntityTypes())
             {
-                // Define o nome da tabela em maiúsculas
                 entity.SetTableName(entity.GetTableName().ToUpper());
 
-                // Para cada propriedade (coluna), define o nome em maiúsculas
                 foreach (var property in entity.GetProperties())
                 {
                     property.SetColumnName(property.GetColumnName().ToUpper());
                 }
             }
-
-            // Outras configurações adicionais, se necessário
             base.OnModelCreating(modelBuilder);
         }
 
