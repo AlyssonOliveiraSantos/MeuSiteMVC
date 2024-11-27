@@ -36,8 +36,8 @@ namespace MeuSiteMVC.Controllers
             {
                 if (ModelState.IsValid) 
                 {
-
-                   UsuarioModel usuario = _usuarioRepositorio.BuscarPorLogin(loginModel.Login);
+                    loginModel.Senha = loginModel.Senha.GerarHash();
+                    UsuarioModel usuario = _usuarioRepositorio.BuscarPorLogin(loginModel.Login);
                     if (usuario != null)
                     {
                         if (usuario.SenhaValida(loginModel.Senha))
