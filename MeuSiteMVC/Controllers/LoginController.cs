@@ -63,5 +63,40 @@ namespace MeuSiteMVC.Controllers
             }
         }
 
+        [HttpPost]
+        public IActionResult EnviarLinkParaRedefinirSenha(RedefinirSenhaModel redefinirSenhaModel)
+        {
+            try
+            {
+                if (ModelState.IsValid)
+                {
+                    UsuarioModel usuario = _usuarioRepositorio.BuscarPorEmailELOGIN(redefinirSenhaModel.Email, redefinirSenhaModel.Login);
+
+                    if (usuario != null)
+                    {
+                        string novaSenha = usuario.GerarNovaSenha();
+
+                        TempData["MenssagemSucesso"] = "Enviamos para seu e-mail cadastrado uma nova senha.";
+                        return RedirectToAction("Index", "Login");
+                    }
+
+                    TempData["MenssagemErro"] = "Não conseguimos redefinir sua senha. Por favor, verifique os dados informados";
+                }
+
+                return View("Index");
+            }
+            catch (Exception ex)
+            {
+                TempData["MenssagemErro"] = $"Ops, não conseguimos redefinir sua senha. Tente novamente. Detalhe do erro: {ex.Message}";
+                return RedirectToAction("Index");
+            }
+        }
+
+
+        public IActionResult RedefinirSenha()
+        {
+            return View();
+        }
+
     }
 }

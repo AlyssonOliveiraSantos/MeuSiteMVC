@@ -6,6 +6,8 @@ namespace MeuSiteMVC.Repositorio
     {
         UsuarioModel BuscarPorLogin(string login);
 
+        UsuarioModel BuscarPorEmailELOGIN(string email, string login);
+
         UsuarioModel ListarPorId(int id);
 
         List<UsuarioModel> BuscarTodos();
