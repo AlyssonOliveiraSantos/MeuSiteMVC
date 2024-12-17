@@ -13,6 +13,7 @@ namespace MeuSiteMVC.Repositorio
         ContatoModel Atualizar(ContatoModel contato);
 
         bool Apagar(int id);
+
  
     }
 }

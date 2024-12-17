@@ -10,11 +10,13 @@ namespace MeuSiteMVC.Controllers
 
         private readonly IUsuarioRepositorio _usuarioRepositorio;
         private readonly ISessao _sessao;
+        private readonly IEmail _email;
         
-        public LoginController(IUsuarioRepositorio usuarioRepositorio, ISessao sessao)
+        public LoginController(IUsuarioRepositorio usuarioRepositorio, ISessao sessao, IEmail email)
         {
             _usuarioRepositorio = usuarioRepositorio;
             _sessao = sessao;
+            _email = email;
         }
 
         public IActionResult index()
@@ -75,8 +77,22 @@ namespace MeuSiteMVC.Controllers
                     if (usuario != null)
                     {
                         string novaSenha = usuario.GerarNovaSenha();
+                        _usuarioRepositorio.Atualizar(usuario);
+                        string menssagem = $"Sua nova senha é : {novaSenha}";
 
-                        TempData["MenssagemSucesso"] = "Enviamos para seu e-mail cadastrado uma nova senha.";
+                        bool emailEnviado = _email.Enviar(usuario.Email, "Sistema de Contatos - Nova Senha", menssagem);
+
+                        if (emailEnviado)
+                        {
+                            _usuarioRepositorio.Atualizar(usuario);
+                            TempData["MenssagemSucesso"] = "Enviamos para seu e-mail cadastrado uma nova senha.";
+
+                        }else
+                        {
+                            TempData["MenssagemErro"] = "Não conseguimos enviar o e-mail. Por favor, tente novamente";
+                        }
+
+
                         return RedirectToAction("Index", "Login");
                     }
 
